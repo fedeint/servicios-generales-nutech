@@ -21,10 +21,8 @@ const { speed = 'slow', direction = 'left', class: className = '' } = Astro.prop
 <script>
   const scrollers = document.querySelectorAll(".scroller");
 
-  // Si el usuario no ha optado por reducir el movimiento, agregamos la animación
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    addAnimation();
-  }
+  // Carrusel infinito siempre activo (el usuario lo pidió explícitamente)
+  addAnimation();
 
   function addAnimation() {
     scrollers.forEach((scroller) => {
