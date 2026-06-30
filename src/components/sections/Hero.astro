@@ -19,6 +19,7 @@
       poster={`${import.meta.env.BASE_URL}images/hero-poster.jpg`}
       onerror="this.style.display='none'"
     >
+      <source src={`${import.meta.env.BASE_URL}video-hersection-mobile.mp4`} type="video/mp4" media="(max-width: 768px)">
       <source src={`${import.meta.env.BASE_URL}video-hersection.mp4`} type="video/mp4">
     </video>
 
@@ -91,19 +92,10 @@
     }
   });
   
-  // En móvil: quitar el video (la decodificación continua satura la GPU y el
-  // navegador recarga la pestaña). Queda la imagen estática del fallback.
-  // En PC: asegurar la reproducción automática (evita race condition).
-  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  // Reproducir el video en todos los dispositivos. En móvil se usa una versión
+  // 720p más liviana (vía <source media>) para no saturar la GPU del celular.
   document.querySelectorAll('#inicio video').forEach((node) => {
     const v = node as HTMLVideoElement;
-    if (isMobile) {
-      v.pause();
-      v.removeAttribute('autoplay');
-      v.removeAttribute('src');
-      v.remove();
-      return;
-    }
     const tryPlay = () => { const p = v.play(); if (p) p.catch(() => {}); };
     if (v.readyState >= 2) tryPlay();
     v.addEventListener('canplay', tryPlay, { once: true });
