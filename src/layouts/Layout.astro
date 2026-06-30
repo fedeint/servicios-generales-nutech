@@ -11,13 +11,13 @@ export interface Props {
 const { 
   title, 
   description = "Nutech - Líderes en transformación digital, automatización de procesos (RPA) e inteligencia artificial para empresas en Perú. Especialistas certificados en UiPath, Power Automate y AWS. Optimizamos sus procesos empresariales con soluciones de IA y automatización robótica.", 
-  image = "/images/transformacion-digital.webp",
+  image = "/images/transformacion-digital.jpg",
   keywords = "transformación digital, RPA, automatización robótica, inteligencia artificial, UiPath, Power Automate, AWS, Azure, consultoría tecnológica, optimización de procesos, Perú, Lima",
   canonical,
   author = "Nutech"
 } = Astro.props;
 
-const baseUrl = Astro.site || 'https://nutech.pe';
+const baseUrl = Astro.site || 'https://nutechcorp.com';
 const currentUrl = canonical || Astro.url.href;
 const ogImage = image.startsWith('http') ? image : `${baseUrl}${image}`;
 ---
@@ -114,8 +114,8 @@ const ogImage = image.startsWith('http') ? image : `${baseUrl}${image}`;
       "@type": "Organization",
       "name": "Nutech",
       "description": "Especialistas en transformación digital, automatización de procesos (RPA) e inteligencia artificial para empresas en Perú",
-      "url": "https://nutech.pe",
-      "logo": "https://nutech.pe/favicon.png",
+      "url": "https://nutechcorp.com",
+      "logo": "https://nutechcorp.com/favicon.png",
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+51-xxx-xxx-xxx",
