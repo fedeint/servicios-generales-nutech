@@ -193,6 +193,17 @@
    INFINITE SCROLL ANIMATION
    =================================== */
 
+/* En móvil: desactivar backdrop-filter (muy pesado para la GPU del celular) */
+@media (max-width: 768px) {
+  .backdrop-blur-sm,
+  .backdrop-blur,
+  .backdrop-blur-md,
+  .backdrop-blur-lg {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
 .scroller {
   max-width: 100%;
   overflow: hidden;

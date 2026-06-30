@@ -4,10 +4,10 @@
   <section id="inicio" class="hero-section relative min-h-[70vh] sm:h-screen lg:min-h-[115vh] flex items-start sm:items-center justify-center overflow-hidden pt-24 lg:pt-32">
   <!-- Background (Video o Degradado) -->
   <div class="absolute inset-0 w-full h-full">
-    <!-- Fallback: Degradado animado de fondo (DETRÁS del video) -->
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-800 to-blue-900 hero-gradient"></div>
+    <!-- Fallback: imagen estática (móvil) / degradado animado, DETRÁS del video -->
+    <div class="hero-fallback absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-800 to-blue-900 hero-gradient"></div>
 
-    <!-- Video Background (encima del degradado; si no carga, se oculta y queda el degradado) -->
+    <!-- Video Background (solo PC; en móvil se quita para no saturar la GPU) -->
     <video
       id="hero-video"
       class="absolute inset-0 w-full h-full object-cover"
@@ -16,6 +16,7 @@
       loop
       playsinline
       preload="metadata"
+      poster={`${import.meta.env.BASE_URL}images/hero-poster.jpg`}
       onerror="this.style.display='none'"
     >
       <source src={`${import.meta.env.BASE_URL}video-hersection.mp4`} type="video/mp4">
@@ -90,9 +91,19 @@
     }
   });
   
-  // Asegurar la reproducción automática de los videos de fondo (evita race condition)
+  // En móvil: quitar el video (la decodificación continua satura la GPU y el
+  // navegador recarga la pestaña). Queda la imagen estática del fallback.
+  // En PC: asegurar la reproducción automática (evita race condition).
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
   document.querySelectorAll('#inicio video').forEach((node) => {
     const v = node as HTMLVideoElement;
+    if (isMobile) {
+      v.pause();
+      v.removeAttribute('autoplay');
+      v.removeAttribute('src');
+      v.remove();
+      return;
+    }
     const tryPlay = () => { const p = v.play(); if (p) p.catch(() => {}); };
     if (v.readyState >= 2) tryPlay();
     v.addEventListener('canplay', tryPlay, { once: true });
@@ -109,6 +120,14 @@
     transform: scale(1.08); /* evita bordes transparentes por el desenfoque */
     -webkit-mask-image: linear-gradient(to bottom, transparent 38%, #000 70%);
     mask-image: linear-gradient(to bottom, transparent 38%, #000 70%);
+  }
+  /* En móvil: imagen estática de fondo (el video se quita por JS) */
+  @media (max-width: 768px) {
+    .hero-fallback {
+      background-image: url('/images/hero-poster.jpg');
+      background-size: cover;
+      background-position: center;
+    }
   }
   .hero-gradient {
     animation: gradient-shift 15s ease infinite;
