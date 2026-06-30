@@ -20,13 +20,24 @@
     >
       <source src={`${import.meta.env.BASE_URL}video-hersection.mp4`} type="video/mp4">
     </video>
-    
+
+    <!-- Copia desenfocada del video (solo parte inferior) = difuminado frosted fiable -->
+    <video
+      class="hero-video-blur absolute inset-0 w-full h-full object-cover pointer-events-none"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      aria-hidden="true"
+    >
+      <source src={`${import.meta.env.BASE_URL}video-hersection.mp4`} type="video/mp4">
+    </video>
+
     <!-- Overlay oscuro para reducir brillo del video (más opaco) -->
     <div class="absolute inset-0 bg-black/55"></div>
     <!-- Overlay para contraste -->
     <div class="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-transparent to-orange-900/30"></div>
-    <!-- Difuminado: desenfoque gradual del video hacia abajo (frosted) -->
-    <div class="absolute bottom-0 left-0 right-0 h-56 backdrop-blur-md pointer-events-none" style="-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 75%);mask-image:linear-gradient(to bottom,transparent 0%,#000 75%)"></div>
     <!-- Difuminado: fundido a blanco hacia la siguiente sección -->
     <div class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none"></div>
   </div>
@@ -89,17 +100,24 @@
     }
   });
   
-  // Asegurar la reproducción automática del video de fondo (evita race condition)
-  const video = document.getElementById('hero-video') as HTMLVideoElement | null;
-  if (video) {
-    const tryPlay = () => { const p = video.play(); if (p) p.catch(() => {}); };
-    if (video.readyState >= 2) tryPlay();
-    video.addEventListener('canplay', tryPlay, { once: true });
-    video.addEventListener('loadeddata', tryPlay, { once: true });
-  }
+  // Asegurar la reproducción automática de los videos de fondo (evita race condition)
+  document.querySelectorAll('#inicio video').forEach((node) => {
+    const v = node as HTMLVideoElement;
+    const tryPlay = () => { const p = v.play(); if (p) p.catch(() => {}); };
+    if (v.readyState >= 2) tryPlay();
+    v.addEventListener('canplay', tryPlay, { once: true });
+    v.addEventListener('loadeddata', tryPlay, { once: true });
+  });
 </script>
 
 <style>
+  /* Copia desenfocada del video, visible solo en la parte inferior (difuminado) */
+  .hero-video-blur {
+    filter: blur(14px);
+    transform: scale(1.08); /* evita bordes transparentes por el desenfoque */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 48%, #000 82%);
+    mask-image: linear-gradient(to bottom, transparent 48%, #000 82%);
+  }
   .hero-gradient {
     animation: gradient-shift 15s ease infinite;
     background-size: 200% 200%;
