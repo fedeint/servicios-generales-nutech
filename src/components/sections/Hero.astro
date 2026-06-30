@@ -30,8 +30,8 @@
 
     <!-- Difuminado frosted: fotograma desenfocado ENCIMA de los overlays (visible) -->
     <div class="hero-video-blur absolute inset-0 pointer-events-none" style={`background-image:url(${import.meta.env.BASE_URL}images/hero-blur-frame.jpg)`} aria-hidden="true"></div>
-    <!-- Difuminado: fundido a blanco hacia la siguiente sección -->
-    <div class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none"></div>
+    <!-- Difuminado: fundido a blanco hacia la siguiente sección (más corto en móvil para no tapar botones) -->
+    <div class="absolute bottom-0 left-0 right-0 h-20 md:h-48 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none"></div>
   </div>
 
     <!-- Contenido centrado -->
@@ -94,8 +94,12 @@
   
   // Reproducir el video en todos los dispositivos. En móvil se usa una versión
   // 720p más liviana (vía <source media>) para no saturar la GPU del celular.
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
   document.querySelectorAll('#inicio video').forEach((node) => {
     const v = node as HTMLVideoElement;
+    // En móvil: reproducir una sola vez (sin loop) para no saturar la GPU de
+    // gama baja (Samsung A14, etc.) que se cuelga con decodificación continua.
+    if (isMobile) v.removeAttribute('loop');
     const tryPlay = () => { const p = v.play(); if (p) p.catch(() => {}); };
     if (v.readyState >= 2) tryPlay();
     v.addEventListener('canplay', tryPlay, { once: true });
@@ -120,6 +124,8 @@
       background-size: cover;
       background-position: center;
     }
+    /* En móvil quitar el difuminado borroso: en pantallas cortas tapaba los botones */
+    .hero-video-blur { display: none; }
   }
   .hero-gradient {
     animation: gradient-shift 15s ease infinite;
