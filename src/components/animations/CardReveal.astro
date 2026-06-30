@@ -1,0 +1,19 @@
+---
+// Reemplazo CSS de framer-motion para las tarjetas (fade + slide + scale,
+// stagger por índice y hover). El reveal lo activa el IntersectionObserver global.
+interface Props {
+  index?: number;
+  hueA?: number;
+  hueB?: number;
+  class?: string;
+}
+const { index = 0, hueA = 220, hueB = 250, class: className = '' } = Astro.props;
+const delay = (index * 0.1).toFixed(2);
+---
+
+<div
+  class={`card-reveal ${className}`}
+  style={`--reveal-delay:${delay}s;--card-hue-a:${hueA};--card-hue-b:${hueB}`}
+>
+  <slot />
+</div>

@@ -2,8 +2,6 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
-import react from '@astrojs/react';
-
 // https://astro.build/config
 export default defineConfig({
   site: 'https://nutechcorp.com',
@@ -18,10 +16,7 @@ export default defineConfig({
     defaultStrategy: 'viewport'
   },
   integrations: [
-    tailwind(), 
-    react({
-      include: ['**/animations/**/*.tsx']
-    })
+    tailwind()
   ],
   vite: {
     build: {

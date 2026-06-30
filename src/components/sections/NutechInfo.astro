@@ -1,5 +1,5 @@
 ---
-import ScrollReveal from '../animations/ScrollReveal.tsx';
+import ScrollReveal from '../animations/ScrollReveal.astro';
 ---
 
 <section id="nutech-info" class="py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-white via-accent-50 to-white">
@@ -13,7 +13,7 @@ import ScrollReveal from '../animations/ScrollReveal.tsx';
     </div>
 
     <!-- Nutech en pocas palabras -->
-    <ScrollReveal direction="up" delay={0} client:visible>
+    <ScrollReveal direction="up" delay={0}>
       <div class="text-center mb-10 lg:mb-12">
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary-800 mb-4 px-4">
           Nutech en pocas palabras
@@ -374,7 +374,7 @@ import ScrollReveal from '../animations/ScrollReveal.tsx';
     </div>
     
     <!-- Section Header -->
-    <ScrollReveal direction="up" delay={0} client:visible>
+    <ScrollReveal direction="up" delay={0}>
       <div class="text-center mb-8 sm:mb-10 lg:mb-12">
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary-800 mb-4 px-4">
           Equipo con amplia experiencia

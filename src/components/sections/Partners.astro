@@ -1,6 +1,6 @@
 ---
 import InfiniteScroll from './InfiniteScroll.astro';
-import ScrollReveal from '../animations/ScrollReveal.tsx';
+import ScrollReveal from '../animations/ScrollReveal.astro';
 ---
 
 <section id="partners" class="py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-white via-accent-50 to-white overflow-hidden">
@@ -14,7 +14,7 @@ import ScrollReveal from '../animations/ScrollReveal.tsx';
     </div>
 
     <!-- Section Header -->
-    <ScrollReveal direction="up" delay={0} client:visible>
+    <ScrollReveal direction="up" delay={0}>
       <div class="text-center mb-8 sm:mb-10 lg:mb-12">
         <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-secondary-800 mb-4 px-4">
           Certificaciones y Alianzas
@@ -26,7 +26,7 @@ import ScrollReveal from '../animations/ScrollReveal.tsx';
     </ScrollReveal>
 
     <!-- Certificaciones Scroll Infinito -->
-    <ScrollReveal direction="up" delay={0.2} client:visible>
+    <ScrollReveal direction="up" delay={0.2}>
       <div class="mb-10 lg:mb-12 max-w-xs md:max-w-none mx-auto">
       <InfiniteScroll speed="slow" direction="left">
         <div class="group relative bg-gradient-to-br from-white to-accent-50 rounded-2xl shadow-xl p-3 sm:p-6 text-center hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 border-transparent hover:border-accent-200 min-w-[280px]">
@@ -74,7 +74,7 @@ import ScrollReveal from '../animations/ScrollReveal.tsx';
     </ScrollReveal>
 
     <!-- Clientes que Confían en Nosotros -->
-    <ScrollReveal direction="up" delay={0} client:visible>
+    <ScrollReveal direction="up" delay={0}>
       <div class="text-center mb-8">
         <h3 class="text-2xl sm:text-3xl font-bold text-secondary-800 mb-8 px-4">
           Clientes que Confían en Nosotros
@@ -83,7 +83,7 @@ import ScrollReveal from '../animations/ScrollReveal.tsx';
     </ScrollReveal>
 
     <!-- Clientes Scroll Infinito -->
-    <ScrollReveal direction="up" delay={0.2} client:visible>
+    <ScrollReveal direction="up" delay={0.2}>
       <div class="max-w-xs md:max-w-none mx-auto">
       <InfiniteScroll speed="slow" direction="left">
       <div class="group relative bg-gradient-to-br from-white to-accent-50 rounded-2xl shadow-xl p-3 sm:p-6 flex items-center justify-center hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 border-transparent hover:border-accent-200 min-w-[200px] h-[120px]">

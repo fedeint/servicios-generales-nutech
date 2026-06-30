@@ -1,0 +1,18 @@
+---
+// Reemplazo CSS de framer-motion: revela el contenido al hacer scroll.
+// La animación la maneja CSS + un IntersectionObserver global (ver Layout.astro).
+interface Props {
+  direction?: 'up' | 'down' | 'left' | 'right';
+  delay?: number;     // segundos
+  duration?: number;  // segundos
+  class?: string;
+}
+const { direction = 'up', delay = 0, duration = 0.6, class: className = '' } = Astro.props;
+---
+
+<div
+  class={`reveal reveal-${direction} ${className}`}
+  style={`--reveal-delay:${delay}s;--reveal-duration:${duration}s`}
+>
+  <slot />
+</div>

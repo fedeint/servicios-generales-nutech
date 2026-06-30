@@ -1,6 +1,6 @@
 ---
-import ScrollReveal from '../animations/ScrollReveal.tsx';
-import CardReveal from '../animations/CardReveal.tsx';
+import ScrollReveal from '../animations/ScrollReveal.astro';
+import CardReveal from '../animations/CardReveal.astro';
 ---
 
 <section id="crecimiento" class="py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-white via-accent-50 to-white">
@@ -14,7 +14,7 @@ import CardReveal from '../animations/CardReveal.tsx';
     </div>
 
     <!-- Section Header -->
-    <ScrollReveal direction="up" delay={0} client:visible>
+    <ScrollReveal direction="up" delay={0}>
       <div class="text-center mb-8 sm:mb-10 lg:mb-12">
         <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-secondary-800 mb-4 leading-tight px-4">
           Resultados que impulsan su negocio
@@ -25,7 +25,7 @@ import CardReveal from '../animations/CardReveal.tsx';
     <!-- Content Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 max-w-xs md:max-w-none mx-auto items-stretch">
       <!-- Card 1: Reducción de Costos -->
-      <CardReveal index={0} hueA={220} hueB={250} client:visible>
+      <CardReveal index={0} hueA={220} hueB={250}>
       <div class="group relative bg-gradient-to-br from-white to-accent-50 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-accent-200 h-full flex flex-col">
         <!-- Efecto de brillo animado -->
         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-accent-200/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 z-10"></div>
@@ -54,7 +54,7 @@ import CardReveal from '../animations/CardReveal.tsx';
       </CardReveal>
 
       <!-- Card 2: Aumento de Productividad -->
-      <CardReveal index={1} hueA={210} hueB={240} client:visible>
+      <CardReveal index={1} hueA={210} hueB={240}>
       <div class="group relative bg-gradient-to-br from-white to-accent-50 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-accent-200 h-full flex flex-col">
         <!-- Efecto de brillo animado -->
         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-accent-200/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 z-10"></div>
@@ -77,7 +77,7 @@ import CardReveal from '../animations/CardReveal.tsx';
       </CardReveal>
 
       <!-- Card 3: Escalabilidad -->
-      <CardReveal index={2} hueA={200} hueB={230} client:visible>
+      <CardReveal index={2} hueA={200} hueB={230}>
       <div class="group relative bg-gradient-to-br from-white to-accent-50 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 border-2 border-transparent hover:border-accent-200 h-full flex flex-col">
         <!-- Efecto de brillo animado -->
         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-accent-200/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 z-10"></div>
