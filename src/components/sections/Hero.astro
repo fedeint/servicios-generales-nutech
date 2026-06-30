@@ -21,13 +21,13 @@
       <source src={`${import.meta.env.BASE_URL}video-hersection.mp4`} type="video/mp4">
     </video>
 
-    <!-- Difuminado frosted: fotograma del video desenfocado (solo parte inferior, imagen estática = siempre visible) -->
-    <div class="hero-video-blur absolute inset-0 pointer-events-none" style={`background-image:url(${import.meta.env.BASE_URL}images/hero-blur-frame.jpg)`} aria-hidden="true"></div>
-
     <!-- Overlay oscuro para reducir brillo del video (más opaco) -->
     <div class="absolute inset-0 bg-black/55"></div>
     <!-- Overlay para contraste -->
     <div class="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-transparent to-orange-900/30"></div>
+
+    <!-- Difuminado frosted: fotograma desenfocado ENCIMA de los overlays (visible) -->
+    <div class="hero-video-blur absolute inset-0 pointer-events-none" style={`background-image:url(${import.meta.env.BASE_URL}images/hero-blur-frame.jpg)`} aria-hidden="true"></div>
     <!-- Difuminado: fundido a blanco hacia la siguiente sección -->
     <div class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none"></div>
   </div>
@@ -105,10 +105,10 @@
   .hero-video-blur {
     background-size: cover;
     background-position: center;
-    filter: blur(14px);
+    filter: blur(16px) brightness(0.62);
     transform: scale(1.08); /* evita bordes transparentes por el desenfoque */
-    -webkit-mask-image: linear-gradient(to bottom, transparent 48%, #000 82%);
-    mask-image: linear-gradient(to bottom, transparent 48%, #000 82%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 38%, #000 70%);
+    mask-image: linear-gradient(to bottom, transparent 38%, #000 70%);
   }
   .hero-gradient {
     animation: gradient-shift 15s ease infinite;
