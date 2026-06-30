@@ -4,22 +4,22 @@
   <section id="inicio" class="hero-section relative min-h-[70vh] sm:h-screen lg:min-h-[115vh] flex items-start sm:items-center justify-center overflow-hidden pt-24 lg:pt-32">
   <!-- Background (Video o Degradado) -->
   <div class="absolute inset-0 w-full h-full">
-    <!-- Video Background (se oculta si no carga) -->
-    <video 
+    <!-- Fallback: Degradado animado de fondo (DETRÁS del video) -->
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-800 to-blue-900 hero-gradient"></div>
+
+    <!-- Video Background (encima del degradado; si no carga, se oculta y queda el degradado) -->
+    <video
       id="hero-video"
-      class="w-full h-full object-cover" 
-      autoplay 
-      muted 
-      loop 
+      class="absolute inset-0 w-full h-full object-cover"
+      autoplay
+      muted
+      loop
       playsinline
-      preload="metadata"
+      preload="auto"
       onerror="this.style.display='none'"
     >
       <source src={`${import.meta.env.BASE_URL}video-hersection.mp4`} type="video/mp4">
     </video>
-    
-    <!-- Fallback: Degradado animado de fondo -->
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-800 to-blue-900 hero-gradient"></div>
     
     <!-- Overlay oscuro para reducir brillo del video -->
     <div class="absolute inset-0 bg-black/40"></div>
@@ -87,15 +87,13 @@
     }
   });
   
-  // Ocultar el degradado si el video carga correctamente
-  const video = document.getElementById('hero-video');
+  // Asegurar la reproducción automática del video de fondo (evita race condition)
+  const video = document.getElementById('hero-video') as HTMLVideoElement | null;
   if (video) {
-    video.addEventListener('loadeddata', () => {
-      const gradient = document.querySelector('.hero-gradient') as HTMLElement;
-      if (gradient) {
-        gradient.style.opacity = '0';
-      }
-    });
+    const tryPlay = () => { const p = video.play(); if (p) p.catch(() => {}); };
+    if (video.readyState >= 2) tryPlay();
+    video.addEventListener('canplay', tryPlay, { once: true });
+    video.addEventListener('loadeddata', tryPlay, { once: true });
   }
 </script>
 
